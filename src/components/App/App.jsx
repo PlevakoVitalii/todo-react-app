@@ -59,43 +59,42 @@ export default class App extends Component {
     this.setState({ filter })
   }
 
-//Function for TodoList--> TodoListItem
+  //Function for TodoList--> TodoListItem
 
-//Фун-ия для переключения состояния important или done
-//что бедет передано в propName
-toggleProperty(arr, id, propName) {
-  const idx = arr.findIndex((el) => el.id === id);
+  //Фун-ия для переключения состояния important или done
+  //что бедет передано в propName
+  toggleProperty(arr, id, propName) {
+    const idx = arr.findIndex((el) => el.id === id);
 
-  //1.update object
-  const oldItem = arr[idx];
-  const newItem = {
-    ...oldItem,
-    [propName]: !oldItem[propName]
+    //1.update object
+    const oldItem = arr[idx];
+    const newItem = {
+      ...oldItem,
+      [propName]: !oldItem[propName]
+    }
+
+    return [
+      ...arr.slice(0, idx),
+      newItem,
+      ...arr.slice(idx + 1)
+    ];
   }
 
-  //2.construct new array
-  return [
-    ...arr.slice(0, idx),
-    newItem,
-    ...arr.slice(idx + 1)
-  ];
-}
+  onToggleImportant = (id) => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.toggleProperty(todoData, id, 'important')
+      }
+    })
+  }
 
-onToggleImportant = (id) => {
-  this.setState(({ todoData }) => {
-    return {
-      todoData: this.toggleProperty(todoData, id, 'important')
-    }
-  })
-}
-
-onToggleDone = (id) => {
-  this.setState(({ todoData }) => {
-    return {
-      todoData: this.toggleProperty(todoData, id, 'done')
-    }
-  })
-}
+  onToggleDone = (id) => {
+    this.setState(({ todoData }) => {
+      return {
+        todoData: this.toggleProperty(todoData, id, 'done')
+      }
+    })
+  }
 
   deleteItem = (id) => {
     this.setState(({ todoData }) => {
@@ -111,8 +110,6 @@ onToggleDone = (id) => {
       }
     })
   }
-
-//Function for ItemAddForm
 
   addItem = (text) => {
     //generate id?
@@ -130,10 +127,6 @@ onToggleDone = (id) => {
     })
   }
 
-  //Use for const visibleItems
-  //Учли текст в строке поиск далее 
-  //учли нажатыую кнопку ItemStatusFilter
-  //и только потом передали результат в TodoList для рендеринга
   search(items, term) {
     if (term.length === 0) {
       return items;
@@ -160,22 +153,12 @@ onToggleDone = (id) => {
   }
 
   render() {
-//Достали с помощью деструктуризации данные из state
     const { todoData, term, filter } = this.state;
-
-//Определили видимые елементы
     const visibleItems = this.filter(
       this.search(todoData, term), filter);
 
-// Счетчик выполненых заданий
     const doneCount = todoData.filter((el) => el.done).length;
-
-// Счетчик НЕ выполненых заданий
     const todoCount = todoData.length - doneCount;
-
-
-// JSX код с передачей в props необходимых
-//функций и данных
 
     return (
       <div className="todo-app" >

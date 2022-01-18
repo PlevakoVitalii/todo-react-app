@@ -1,9 +1,6 @@
 import React from 'react';
 import './AppHEader.css'
 
-
-//Достали  из props { toDo, done }
-//что бы не писать {props.toDo} и {props.done}
 const AppHeader = ({ toDo, done }) => {
   return (
     <div className="app-header d-flex">
