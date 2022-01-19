@@ -7,7 +7,6 @@ import ItemStatusFilter from '../ItemStatusFilter/ItemStatusFilter';
 import ItemAddForm from '../ItemAddForm'
 
 import './App.css'
-
 export default class App extends Component {
 
   maxId = 100;
@@ -20,10 +19,9 @@ export default class App extends Component {
       this.createTodoItem('Change JOB'),
     ],
     term: '',
-    filter: 'all'//active, all, done
+    filter: 'all'
   }
 
-  //Function for create todoData in state
   createTodoItem(label) {
     return {
       label,
@@ -33,9 +31,6 @@ export default class App extends Component {
     }
   }
 
-  //Function for AppHeader
-
-  //1. Function for SearchPanel
 
   searchItem = (text) => {
     this.setState(({ todoData }) => {
@@ -54,19 +49,14 @@ export default class App extends Component {
     this.setState({ term })
   };
 
-  //2. Function for ItemStatusFilter
+
   onFilterChange = (filter) => {
     this.setState({ filter })
   }
 
-  //Function for TodoList--> TodoListItem
-
-  //Фун-ия для переключения состояния important или done
-  //что бедет передано в propName
   toggleProperty(arr, id, propName) {
     const idx = arr.findIndex((el) => el.id === id);
 
-    //1.update object
     const oldItem = arr[idx];
     const newItem = {
       ...oldItem,
@@ -112,9 +102,7 @@ export default class App extends Component {
   }
 
   addItem = (text) => {
-    //generate id?
     const newItem = this.createTodoItem(text)
-    //add element in Arr
     this.setState(({ todoData }) => {
       const newArray = [
         ...todoData,
