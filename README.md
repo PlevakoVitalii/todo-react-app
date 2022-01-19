@@ -2,10 +2,9 @@
 
 ![](https://github.com/PlevakoVitalii/todo-react-app/blob/master/readme-image.bmp)
 
-Display todo-react-app [Todo](https://www.themoviedb.org).
+Deployed todo-react-app here [Todo](https://plevakovitalii.github.io/todo-react-app/todo-react/).
 
-You can watch today popular movies [here](https://plevakovitalii.github.io/todo-react-app/todo-react/)  
- Implemented functionality:
+Implemented functionality:
 
 - search for elements;
 - filtering by status (completed or not);
